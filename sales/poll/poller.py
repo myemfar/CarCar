@@ -19,11 +19,11 @@ def poll(repeat=True):
         try:
             # Write your polling logic, here
             # Do not copy entire file
-
+            # test comment
             pass
         except Exception as e:
             print(e, file=sys.stderr)
-        
+
         if (not repeat):
             break
 
