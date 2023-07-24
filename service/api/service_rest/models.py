@@ -23,13 +23,13 @@ class Appointment(models.Model):
     customer_name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name
+        return self.customer_name    ## better string 
 
     def get_api_url(self):
         return reverse("api_list_appointments" , kwargs={"pk": self.id})
 
 class AutomobileVO(models.Model):
-    import_href = models.CharField(max_length=200, unique=True, null=True)
+    sold = models.BooleanField(default=False)
     vin = models.CharField(max_length=200) 
     
 
