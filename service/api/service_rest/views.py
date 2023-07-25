@@ -12,7 +12,7 @@ class AutomobileVOEncoder(ModelEncoder):
 
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
-    properties = ["first_name", "last_name", "employee_id"]
+    properties = ["first_name", "last_name", "employee_id", "id"]
 
 class AppointmentListEncoder(ModelEncoder):
     model = Appointment
@@ -74,7 +74,7 @@ def api_list_appointments(request):
         )
     else:
         content = json.loads(request.body)
-        technician = Technician.objects.get(employee_id = content["technician"])
+        technician = Technician.objects.get(id = content["technician"])
         content["technician"] = technician
 
         try:
@@ -113,10 +113,10 @@ def api_detail_appointment(request, pk):
             )
 
 @require_http_methods(["PUT"])
-def cancel_appointment(request, pk):
+def api_cancel_appointment(request, pk):
     try:
         appointment = Appointment.objects.get(id=pk)
-        appointment.status = "Cancelled"
+        appointment.status = "canceled"
         appointment.save()
 
         return JsonResponse(
@@ -130,10 +130,10 @@ def cancel_appointment(request, pk):
 
 
 @require_http_methods(["PUT"])
-def finished_appointment(request, pk):
+def api_finish_appointment(request, pk):
     try:
         appointment = Appointment.objects.get(id=pk)
-        appointment.status = "Finished"
+        appointment.status = "finished"
         appointment.save()
 
         return JsonResponse(

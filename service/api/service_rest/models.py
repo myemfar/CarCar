@@ -14,11 +14,11 @@ class Technician(models.Model):
 
 class Appointment(models.Model):
     date_time = models.DateTimeField()
-    technician = models.ForeignKey(Technician, on_delete=models.PROTECT)
+    technician = models.ForeignKey(Technician, on_delete=models.CASCADE)
     vip = models.BooleanField(default=False)
     vin = models.CharField(max_length=200)
     reason = models.TextField()
-    status = models.CharField(max_length=200)
+    status = models.CharField(max_length=200, default="PENDING")
     customer = models.CharField(max_length=200)
 
     def __str__(self):
