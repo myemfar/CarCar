@@ -16,7 +16,7 @@ function AutomobileList(props) {
                 <td>{ automobile.color }</td>
                 <td>{ automobile.year }</td>
                 <td>{ automobile.vin }</td>
-                <td>{ automobile.sold }</td>
+                <td>{ automobile.sold.toString() }</td>
               </tr>
             );
           })}

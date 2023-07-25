@@ -9,14 +9,15 @@ function LoadData() {
   const [manufacturersData, setManufacturersData] = useState(null);
   const [automobilesData, setAutomobilesData] = useState(null);
   const [modelData, setModelData] = useState(null);
-
+  const [salespeopleData, setSalespeopleData] = useState(null);
+  const [customerData, setCustomerData] = useState(null);
+  const [salesData, setSalesData] = useState(null);
 
   // Define each function and api call
   async function loadManufacturers() {
     const response = await fetch('http://localhost:8100/api/manufacturers/');
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setManufacturersData(data.manufacturers);
     } else {
       console.error(response);
@@ -27,7 +28,6 @@ function LoadData() {
     const response = await fetch('http://localhost:8100/api/automobiles/');
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setAutomobilesData(data.autos);
     } else {
       console.error(response);
@@ -38,8 +38,43 @@ function LoadData() {
     const response = await fetch('http://localhost:8100/api/models/');
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setModelData(data.models);
+    } else {
+      console.error(response);
+    }
+  }
+
+  async function loadSalespeople() {
+    const response = await fetch ('http://localhost:8090/api/salespeople/');
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data)
+      console.log(data.salespeople)
+      setSalespeopleData(data.salespeople);
+    } else {
+      console.error(response);
+    }
+  }
+
+  async function loadCustomers() {
+    const response = await fetch ('http://localhost:8090/api/customers/');
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data)
+      console.log(data.customers)
+      setCustomerData(data.customers);
+    } else {
+      console.error(response);
+    }
+  }
+
+  async function loadSales() {
+    const response = await fetch ('http://localhost:8090/api/sales/');
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data)
+      console.log(data.sales)
+      setSalesData(data.sales);
     } else {
       console.error(response);
     }
@@ -50,12 +85,17 @@ function LoadData() {
     loadManufacturers();
     loadAutomobiles();
     loadModels();
+    loadSalespeople();
+    loadCustomers();
+    loadSales();
   }, []);
 
   // Add here for each set of data
   return (
     <React.StrictMode>
-      <App manufacturers={manufacturersData} autos={automobilesData} models={modelData}/>
+      <App manufacturers={manufacturersData} autos={automobilesData} models={modelData} salespeople={salespeopleData}
+      customers={customerData} sales={salesData}
+      />
     </React.StrictMode>
   );
 }

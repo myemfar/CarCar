@@ -1,3 +1,7 @@
+// note: old index.js file kept in case the new version combining all functions into
+// a single main function is not considered a good way to solve the problem
+
+
 // import React from 'react';
 // import ReactDOM from 'react-dom/client';
 // import App from './App';

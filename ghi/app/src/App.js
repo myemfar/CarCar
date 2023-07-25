@@ -6,9 +6,9 @@ import ModelList from './ModelList';
 import AutomobileList from './AutomobileList';
 // import TechnicianList from './TechnicianList';
 // import AppointmentList from './AppointmentList';
-// import SalesList from './SalesList';
-// import CustomerList from './CustomerList';
-// import SalespeopleList from './SalespeopleList';
+import SalesList from './SaleList';
+import CustomerList from './CustomerList';
+import SalespeopleList from './SalespeopleList';
 // import ManufacturerForm from './ManufacturerForm';
 // import ModelsForm from './ModelsForm';
 // import AutomobileForm from './AutomobileForm';
@@ -49,18 +49,18 @@ function App(props) {
             <Route path="history" element={<AppointmentList appointments ={props.appointments} />} />
             <Route path="new" element={<AppointmentForm />} />
           </Route> */}
-          {/* <Route path="sales">
+          <Route path="sales">
             <Route path="list" element={<SalesList sales ={props.sales} />} />
-            <Route path="new" element={<SaleForm />} />
-          </Route> */}
-          {/* <Route path="customers">
+            {/* <Route path="new" element={<SaleForm />} /> */}
+          </Route>
+          <Route path="customers">
             <Route path="list" element={<CustomerList customers ={props.customers} />} />
-            <Route path="new" element={<CustomerForm />} />
-          </Route> */}
-          {/* <Route path="salespeople">
+            {/* <Route path="new" element={<CustomerForm />} /> */}
+          </Route>
+          <Route path="salespeople">
             <Route path="list" element={<SalespeopleList salespeople ={props.salespeople} />} />
-            <Route path="new" element={<SalespeopleForm />} />
-          </Route> */}
+            {/* <Route path="new" element={<SalespeopleForm />} /> */}
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
