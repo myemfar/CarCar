@@ -6,8 +6,7 @@ class Technician(models.Model):
     last_name = models.CharField(max_length=100)
     employee_id = models.PositiveIntegerField (null=True, unique=True)
 
-    def __str__(self):
-        return self.name
+    
 
     def get_api_url(self):
         return reverse("api_list_technicians" , kwargs={"pk": self.id})
@@ -19,11 +18,11 @@ class Appointment(models.Model):
     vip = models.BooleanField(default=False)
     vin = models.CharField(max_length=200)
     reason = models.TextField()
-    status = models.BooleanField(default=False)
-    customer_name = models.CharField(max_length=200)
+    status = models.CharField(max_length=200)
+    customer = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.customer_name    ## better string 
+        return f"{self.customer} {self.vin}"    ## better string 
 
     def get_api_url(self):
         return reverse("api_list_appointments" , kwargs={"pk": self.id})
