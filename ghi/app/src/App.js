@@ -4,8 +4,8 @@ import Nav from './Nav';
 import ManufacturerList from './ManufacturerList';
 import ModelList from './ModelList';
 import AutomobileList from './AutomobileList';
-// import TechnicianList from './TechnicianList';
-// import AppointmentList from './AppointmentList';
+import TechnicianList from './TechnicianList';
+import AppointmentList from './AppointmentList';
 import SalesList from './SaleList';
 import CustomerList from './CustomerList';
 import SalespeopleList from './SalespeopleList';
@@ -41,14 +41,14 @@ function App(props) {
             <Route path="list" element={<AutomobileList autos ={props.autos} />} />
             <Route path="new" element={<AutomobileForm />} />
           </Route>
-          {/* <Route path="technicians">
+          <Route path="technicians">
             <Route path="list" element={<TechnicianList technicians ={props.technicians} />} />
             <Route path="new" element={<TechnicianForm />} />
-          </Route> */}
-          {/* <Route path="appointments">
+          </Route>
+          <Route path="appointments">
             <Route path="history" element={<AppointmentList appointments ={props.appointments} />} />
             <Route path="new" element={<AppointmentForm />} />
-          </Route> */}
+          </Route>
           <Route path="sales">
             <Route path="list" element={<SalesList sales ={props.sales} />} />
             <Route path="new" element={<SaleForm />} />

@@ -7,12 +7,22 @@ function AppointmentForm() {
     const [vin, setVin] = useState('');
     const [customer, setCustomer] = useState('');
     const [reason, setReason] = useState('');
+    const [vip, setVip] = useState(false);
+    const [status, setStatus] = useState('PENDING');
 
     useEffect(() => {
         fetch('http://localhost:8080/api/technicians/')
             .then(response => response.json())
             .then(data => setTechnicians(data));
     }, []);
+
+    useEffect(() => {
+        if (vin !== '') {
+            fetch(`http://localhost:8080/api/inventory/${vin}`)    // create endpoint?? 
+                .then(response => response.json())
+                .then(data => setVip(data.isInInventory));
+        }
+    }, [vin]);
 
     const handleDateTimeChange = (event) =>{
         const value = event.target.value;
@@ -40,9 +50,11 @@ function AppointmentForm() {
         const data = {}; 
         data.date_time = dateTime;
         data.technician = technician; 
+        data.vip = vip;
         data.vin = vin;
         data.customer = customer;
         data.reason = reason;
+        data.status = status;
         const appointmentUrl = 'http://localhost:8080/api/appointments/';
         const fetchConfig = {
             method: "post", 
@@ -60,6 +72,8 @@ function AppointmentForm() {
             setVin('');
             setCustomer('');
             setReason('');
+            setVip(false);
+            setStatus('PENDING');
         } else if (!response.ok) {
             console.log(fetchConfig)
         }

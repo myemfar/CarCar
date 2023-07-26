@@ -66,19 +66,19 @@ function CustomerForm( ) {
             <form onSubmit= {handleSubmit} id="create-customer-form">
               <div className="form-floating mb-3">
                 <input onChange= {handleFirstNameChange} placeholder="first_name" required type="text" name="first_name" id="first_name" className="form-control" value={firstName} />
-                <label htmlFor="fabric">First Name</label>
+                <label htmlFor="first_name">First Name</label>
               </div>
               <div className="form-floating mb-3">
                 <input onChange= {handleLastNameChange} placeholder="last_name" required type="text" name="last_name" id="last_name" className="form-control" value={lastName}/>
-                <label htmlFor="style_name">Last Name</label>
+                <label htmlFor="last_name">Last Name</label>
               </div>
               <div className="form-floating mb-3">
                 <input onChange= {handleAddressChange} placeholder="address" required type="text" name= "address" id="address" className="form-control" value={address}/>
-                <label htmlFor="color">Address</label>
+                <label htmlFor="address">Address</label>
               </div>
               <div className="form-floating mb-3">
                 <input onChange= {handlePhoneNumberChange} placeholder="phone_number" required type="text" name= "phone_number" id="phone_number" className="form-control" value={phoneNumber}/>
-                <label htmlFor="color">Phone Number</label>
+                <label htmlFor="phone_number">Phone Number</label>
               </div>
               <button className="btn btn-primary">Create</button>
             </form>
