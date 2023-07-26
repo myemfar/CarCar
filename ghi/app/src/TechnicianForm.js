@@ -7,7 +7,7 @@ function TechnicianForm( ) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [employee_id, setEmployee_id] = useState('');
-   
+
 
     // set our handlechange events
 
@@ -21,12 +21,12 @@ function TechnicianForm( ) {
     }
 
     const handleEmployeeIdChange = (event) => {
-        const value = event.target.value; 
+        const value = event.target.value;
         setEmployee_id(value);
-   
+
     }
-   
-    
+
+
 
     // what to do on submit (populate data, send to api)
     const handleSubmit = async (event) => {
@@ -41,7 +41,7 @@ function TechnicianForm( ) {
         body: JSON.stringify(data),
         headers: {
         'Content-Type': 'application/json',
-        }, 
+        },
     };
     // reset form after response is recieved
     const response = await fetch(technicianUrl, fetchConfig);
@@ -60,7 +60,7 @@ function TechnicianForm( ) {
         <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
-            <h1>Create a new customer</h1>
+            <h1>Create a new technician</h1>
             <form onSubmit= {handleSubmit} id="create-technician-form">
               <div className="form-floating mb-3">
                 <input onChange= {handleFirstNameChange} placeholder="first_name" required type="text" name="first_name" id="first_name" className="form-control" value={firstName} />
@@ -72,7 +72,7 @@ function TechnicianForm( ) {
               </div>
               <div className="form-floating mb-3">
                 <input onChange= {handleEmployeeIdChange} placeholder="employee_id" required type="positiveintegerfield" name= "employee_id" id="employee_id" className="form-control" value={employee_id}/>
-                <label htmlFor="color">Phone Number</label>
+                <label htmlFor="color">Employee id</label>
               </div>
               <button className="btn btn-primary">Create</button>
             </form>
