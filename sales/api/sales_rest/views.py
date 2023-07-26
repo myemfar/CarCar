@@ -116,13 +116,13 @@ def api_list_sales(request):
     else:
         content = json.loads(request.body)
         try:
-            autoid = content["automobile"]
-            car = AutomobileVO.objects.get(id=autoid)
+            autovin = content["automobile"]
+            car = AutomobileVO.objects.get(vin=autovin)
             content["automobile"] = car
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
                 {
-                    "404 car not found": "sale api post requires existing car ID"
+                    "404 car not found": "sale api post requires existing car VIN"
                 },
                 status = 404,
             )
