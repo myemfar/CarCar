@@ -17,7 +17,7 @@ import AppointmentForm from './AppointmentForm';
 import SaleForm from './SaleForm';
 import CustomerForm from './CustomerForm';
 import SalespeopleForm from './SalespeopleForm';
-// import SalesHistory from './SalesHistory';
+import SalesHistory from './SalesHistory';
 
 function App(props) {
   // if (props.manufacturers === undefined) {
@@ -52,7 +52,7 @@ function App(props) {
           <Route path="sales">
             <Route path="list" element={<SalesList sales ={props.sales} />} />
             <Route path="new" element={<SaleForm />} />
-            {/* <Route path="history" element={<SalesHistory sales ={props.sales} salespeople={props.salespeople} />} /> */}
+            <Route path="history" element={<SalesHistory sales ={props.sales} salespeople={props.salespeople} />} />
           </Route>
           <Route path="customers">
             <Route path="list" element={<CustomerList customers ={props.customers} />} />

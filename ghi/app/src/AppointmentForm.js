@@ -18,7 +18,7 @@ function AppointmentForm() {
 
     useEffect(() => {
         if (vin !== '') {
-            fetch(`http://localhost:8080/api/inventory/${vin}`)    // create endpoint?? 
+            fetch(`http://localhost:8080/api/inventory/${vin}`)    // create endpoint??
                 .then(response => response.json())
                 .then(data => setVip(data.isInInventory));
         }
@@ -33,23 +33,23 @@ function AppointmentForm() {
         setTechnician(value);
     }
     const handleVinChange = (event) => {
-        const value = event.target.value; 
+        const value = event.target.value;
         setVin(value);
     }
     const handleCustomerChange = (event) => {
-        const value = event.target.value; 
+        const value = event.target.value;
         setCustomer(value);
     }
     const handleReasonChange = (event) => {
-        const value = event.target.value; 
+        const value = event.target.value;
         setReason(value);
     }
 
     const handleSubmit = async (event) => {
-        event.preventDefault(); 
-        const data = {}; 
+        event.preventDefault();
+        const data = {};
         data.date_time = dateTime;
-        data.technician = technician; 
+        data.technician = technician;
         data.vip = vip;
         data.vin = vin;
         data.customer = customer;
@@ -57,14 +57,14 @@ function AppointmentForm() {
         data.status = status;
         const appointmentUrl = 'http://localhost:8080/api/appointments/';
         const fetchConfig = {
-            method: "post", 
+            method: "post",
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json',
             },
         };
 
-        const response = await fetch(appointmentUrl, fetchConfig); 
+        const response = await fetch(appointmentUrl, fetchConfig);
         if(response.ok) {
             const newAppointment = await response.json();
             setDateTime('');
