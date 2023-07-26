@@ -1,13 +1,28 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 
-function AppointmentForm( ) {
+function AppointmentForm() {
+    const [technicians, setTechnicians] = useState([]);
     const [dateTime, setDateTime] = useState('');
     const [technician, setTechnician] = useState('');
-    const [vip, setVip] = useState(false);
     const [vin, setVin] = useState('');
+    const [customer, setCustomer] = useState('');
     const [reason, setReason] = useState('');
-    const [status, setStatus] = useState('PENDING'); 
-    const[customer, setCustomer] = useState('');
+    const [vip, setVip] = useState(false);
+    const [status, setStatus] = useState('PENDING');
+
+    useEffect(() => {
+        fetch('http://localhost:8080/api/technicians/')
+            .then(response => response.json())
+            .then(data => setTechnicians(data));
+    }, []);
+
+    useEffect(() => {
+        if (vin !== '') {
+            fetch(`http://localhost:8080/api/inventory/${vin}`)    // create endpoint?? 
+                .then(response => response.json())
+                .then(data => setVip(data.isInInventory));
+        }
+    }, [vin]);
 
     const handleDateTimeChange = (event) =>{
         const value = event.target.value;
@@ -17,30 +32,17 @@ function AppointmentForm( ) {
         const value = event.target.value;
         setTechnician(value);
     }
-
-    const handleVipChange = (event) => {
-        const value = event.target.value; 
-        setVip(value);
-    }
-
     const handleVinChange = (event) => {
         const value = event.target.value; 
         setVin(value);
     }
-
-    const handleReasonChange = (event) => {
-        const value = event.target.value; 
-        setReason(value);
-    }
-
-    const handleStatusChange = (event) => {
-        const value = event.target.value; 
-        setStatus(value);
-    }
-
     const handleCustomerChange = (event) => {
         const value = event.target.value; 
         setCustomer(value);
+    }
+    const handleReasonChange = (event) => {
+        const value = event.target.value; 
+        setReason(value);
     }
 
     const handleSubmit = async (event) => {
@@ -50,12 +52,12 @@ function AppointmentForm( ) {
         data.technician = technician; 
         data.vip = vip;
         data.vin = vin;
+        data.customer = customer;
         data.reason = reason;
         data.status = status;
-        data.customer = customer;
         const appointmentUrl = 'http://localhost:8080/api/appointments/';
         const fetchConfig = {
-            mothod: "post", 
+            method: "post", 
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json',
@@ -67,11 +69,11 @@ function AppointmentForm( ) {
             const newAppointment = await response.json();
             setDateTime('');
             setTechnician('');
-            setVip(false);
             setVin('');
-            setReason('');
-            setStatus('PENDING');
             setCustomer('');
+            setReason('');
+            setVip(false);
+            setStatus('PENDING');
         } else if (!response.ok) {
             console.log(fetchConfig)
         }
@@ -86,32 +88,31 @@ function AppointmentForm( ) {
             <h1>Create a new appointment</h1>
             <form onSubmit= {handleSubmit} id="create-appointment-form">
               <div className="form-floating mb-3">
-                <input onChange= {handleDateTimeChange} placeholder="date_time" required type="datetime-local" name="date_time" id="date_time" className="form-control" value={dateTime} />
-                <label htmlFor="date_time">Date and Time</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input onChange= {handleTechnicianChange} placeholder="technician" required type="text" name="technician" id="technician" className="form-control" value={technician}/>
-                <label htmlFor="technician">Technician</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input onChange= {handleVipChange} placeholder="vip" type="checkbox" name= "vip" id="vip" className="form-control" checked={vip}/>
-                <label htmlFor="vip">VIP</label>
-              </div>
-              <div className="form-floating mb-3">
                 <input onChange= {handleVinChange} placeholder="vin" required type="text" name= "vin" id="vin" className="form-control" value={vin}/>
                 <label htmlFor="vin">VIN</label>
               </div>
               <div className="form-floating mb-3">
-                <textarea onChange= {handleReasonChange} placeholder="reason" required name= "reason" id="reason" className="form-control" value={reason}/>
-                <label htmlFor="reason">Reason</label>
+                <input onChange= {handleDateTimeChange} placeholder="date_time" required type="datetime-local" name="date_time" id="date_time" className="form-control" value={dateTime} />
+                <label htmlFor="date_time">Date and Time</label>
               </div>
               <div className="form-floating mb-3">
-                <input onChange= {handleStatusChange} placeholder="status" required type="text" name= "status" id="status" className="form-control" value={status}/>
-                <label htmlFor="status">Status</label>
+                <select onChange={handleTechnicianChange} value={technician} className="form-control" id="technician">
+                  <option value="">Select a technician</option>
+                  {technicians.map(tech => (
+                    <option key={tech.id} value={tech.id}>
+                      {tech.first_name} {tech.last_name}
+                    </option>
+                  ))}
+                </select>
+                <label htmlFor="technician">Technician</label>
               </div>
               <div className="form-floating mb-3">
                 <input onChange= {handleCustomerChange} placeholder="customer" required type="text" name= "customer" id="customer" className="form-control" value={customer}/>
                 <label htmlFor="customer">Customer</label>
+              </div>
+              <div className="form-floating mb-3">
+                <textarea onChange= {handleReasonChange} placeholder="reason" required name= "reason" id="reason" className="form-control" value={reason}/>
+                <label htmlFor="reason">Reason</label>
               </div>
               <button className="btn btn-primary">Create</button>
             </form>
