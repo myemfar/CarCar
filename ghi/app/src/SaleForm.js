@@ -7,6 +7,7 @@ function SaleForm( ) {
     const [automobiles, setAutomobiles] = useState([]);
     const [salespeople, setSalespeople] = useState([]);
     const [customers, setCustomers] = useState([]);
+    const [sales, setSales] = useState([]);
     const [automobile, setAutomobile] = useState('');
     const [salesperson, setSalesperson] = useState('');
     const [customer, setCustomer] = useState('');
@@ -59,19 +60,39 @@ function SaleForm( ) {
       }
     }
 
+    const fetchSales = async () => {
+      const url = 'http://localhost:8090/api/sales/';
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setSales(data.sales)
+      }
+    }
+
     useEffect(() => {
         fetchAutomobiles();
         fetchSalespeople();
         fetchCustomers();
+        fetchSales();
     }, []);
+
+    const siftVins = []
+    sales.forEach((sale) => {
+      const soldVin = sale.automobile.vin;
+      siftVins.push(soldVin)
+    });
+
+    const filteredAutomobiles = () => {
+      return automobiles.filter((p) =>
+        !siftVins.includes(p.vin)
+      );
+    }
 
     // what to do on submit (populate data, send to api)
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
         data.automobile = automobile;
-        // may need to fuss with this to get the automobile VO ID to send instead
-        // could alter the submission to take vin instead
         data.salesperson = salesperson;
         data.customer = customer;
         data.price = price;
@@ -107,7 +128,7 @@ function SaleForm( ) {
               <div className="mb-3">
                 <select onChange= {handleAutomobileChange} required id="automobile" name= "automobile" className="form-select" value={automobile}>
                   <option value="">Choose an automobile</option>
-                  {automobiles.map(automobile => {
+                  {filteredAutomobiles().map(automobile => {
                     return (
                         <option key={automobile.id} value={automobile.vin}>
                             {automobile.year} {automobile.model.manufacturer.name} {automobile.model.name}, VIN:{automobile.vin}

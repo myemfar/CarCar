@@ -4,7 +4,6 @@ function SalesHistory() {
     const [salespeople, setSalespeople] = useState([]);
     const [salesperson, setSalesperson] = useState('');
     const [sales, setSales] = useState([]);
-    const [salespersonHistory, setSalespersonHistory] = useState([]);
 
     const handleSalespersonChange = (event) => {
         const value = event.target.value;
@@ -36,11 +35,9 @@ function SalesHistory() {
 
     const filteredSales = () => {
         return sales.filter((p) =>
-            p.salesperson.id === salesperson
+            p.salesperson.employee_id === salesperson
         );
     }
-    console.log(filteredSales())
-      console.log(salesperson)
     return (
         <>
         <div className="row">
@@ -52,7 +49,7 @@ function SalesHistory() {
                   <option value="">Choose a salesperson</option>
                   {salespeople.map(salesperson => {
                     return (
-                        <option key={salesperson.id} value={salesperson.id}>
+                        <option key={salesperson.id} value={salesperson.employee_id}>
                             {salesperson.first_name} {salesperson.last_name}
                         </option>
                     );
@@ -72,16 +69,16 @@ function SalesHistory() {
           </tr>
         </thead>
         <tbody>
-          {salesperson && filteredSales().map(sale => {
+            {filteredSales().map(sale => {
                 return (
                 <tr key={sale.id}>
-                    <td>{ sale.customer.first_name } { sale.customer.last_name }</td>
+                    <td>{ sale.customer.first_name }{ sale.customer.last_name }</td>
                     <td>{ sale.automobile.vin }</td>
                     <td>{ sale.price }</td>
                     </tr>
                     );
           })}
-        </tbody>
+          </tbody>
       </table>
       </>);
 }
