@@ -8,6 +8,9 @@ function AppointmentList(props) {
             <th>Date and Time</th>
             <th>Technician</th>
             <th>Reason</th>
+            <th>VIP</th>
+            <th>Status</th>
+            <th>Customer</th>
           </tr>
         </thead>
         <tbody>
@@ -18,6 +21,8 @@ function AppointmentList(props) {
                     <td>{new Date(appointment.date_time). toLocaleString()}</td>
                     <td>{appointment.technician}</td>
                     <td>{appointment.reason}</td>
+                    <td>{appointment.vip}</td>
+                    <td>{appointment.status}</td>
 
                 </tr>
             );

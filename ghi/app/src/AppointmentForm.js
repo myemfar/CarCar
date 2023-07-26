@@ -1,13 +1,18 @@
 import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 
+function AppointmentForm( ) {
+    const [dateTime, setDateTime] = useState('');
 function AppointmentForm( ) {
     const [dateTime, setDateTime] = useState('');
     const [technicians, setTechnicians] = useState([]);
     const [technician, setTechnician] = useState('');
     const [vip, setVip] = useState(false);
+    const [vip, setVip] = useState(false);
     const [vin, setVin] = useState('');
     const [reason, setReason] = useState('');
     const [status, setStatus] = useState('PENDING');
+    const [customer, setCustomer] = useState('');
     const [customer, setCustomer] = useState('');
 
     const handleDateTimeChange = (event) =>{
@@ -24,6 +29,7 @@ function AppointmentForm( ) {
     }
     const handleVinChange = (event) => {
         const value = event.target.value;
+        const value = event.target.value;
         setVin(value);
     }
     const handleReasonChange = (event) => {
@@ -35,6 +41,7 @@ function AppointmentForm( ) {
         setStatus(value);
     }
     const handleCustomerChange = (event) => {
+        const value = event.target.value;
         const value = event.target.value;
         setCustomer(value);
     }
@@ -56,6 +63,7 @@ function AppointmentForm( ) {
         event.preventDefault();
         const data = {};
         data.date_time = dateTime;
+        data.technician = technician;
         data.technician = technician;
         data.vip = vip;
         data.vin = vin;
@@ -86,7 +94,7 @@ function AppointmentForm( ) {
     }
 
     return (
-        <>
+      <>
         <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
