@@ -78,85 +78,7 @@ function AppointmentForm( ) {
 
     }
 
-    
-Sure, here is the updated form to fit the Django model you provided:
-
-jsx
-Copy code
-import React, {useState} from 'react';
-
-function AppointmentForm( ) {
-    const [dateTime, setDateTime] = useState('');
-    const [technician, setTechnician] = useState('');
-    const [vip, setVip] = useState(false);
-    const [vin, setVin] = useState('');
-    const [reason, setReason] = useState('');
-    const [status, setStatus] = useState('PENDING');
-    const [customer, setCustomer] = useState('');
-
-    const handleDateTimeChange = (event) =>{
-        const value = event.target.value;
-        setDateTime(value);
-    }
-    const handleTechnicianChange = (event) => {
-        const value = event.target.value;
-        setTechnician(value);
-    }
-    const handleVipChange = (event) => {
-        const value = event.target.checked;
-        setVip(value);
-    }
-    const handleVinChange = (event) => {
-        const value = event.target.value;
-        setVin(value);
-    }
-    const handleReasonChange = (event) => {
-        const value = event.target.value;
-        setReason(value);
-    }
-    const handleStatusChange = (event) => {
-        const value = event.target.value;
-        setStatus(value);
-    }
-    const handleCustomerChange = (event) => {
-        const value = event.target.value;
-        setCustomer(value);
-    }
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const data = {};
-        data.date_time = dateTime;
-        data.technician = technician;
-        data.vip = vip;
-        data.vin = vin;
-        data.reason = reason;
-        data.status = status;
-        data.customer = customer;
-        const appointmentUrl = 'http://localhost:8080/api/appointments/';
-        const fetchConfig = {
-        method: "post",
-        body: JSON.stringify(data),
-        headers: {
-        'Content-Type': 'application/json',
-        }, 
-    };
-    const response = await fetch(appointmentUrl, fetchConfig);
-    if (response.ok) {
-        const newAppointment = await response.json();
-        setDateTime('');
-        setTechnician('');
-        setVip(false);
-        setVin('');
-        setReason('');
-        setStatus('PENDING');
-        setCustomer('');
-    } else if (!response.ok) {
-        console.log(fetchConfig)
-    }
-    }
-
-    return (                             // VIP = checkbox, REASON = textarea, 
+    return (
         <>
         <div className="row">
         <div className="offset-3 col-6">
@@ -201,6 +123,3 @@ function AppointmentForm( ) {
 }
 
 export default AppointmentForm;
-       
-
-    
