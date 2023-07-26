@@ -4,21 +4,16 @@ import Nav from './Nav';
 import ManufacturerList from './ManufacturerList';
 import ModelList from './ModelList';
 import AutomobileList from './AutomobileList';
-import TechnicianList from './TechnicianList';
-import AppointmentList from './AppointmentList';
+// import TechnicianList from './TechnicianList';
+// import AppointmentList from './AppointmentList';
 import SalesList from './SaleList';
 import CustomerList from './CustomerList';
 import SalespeopleList from './SalespeopleList';
 // import ManufacturerForm from './ManufacturerForm';
 // import ModelsForm from './ModelsForm';
 import AutomobileForm from './AutomobileForm';
-<<<<<<< HEAD
  import TechnicianForm from './TechnicianForm';
  import AppointmentForm from './AppointmentForm';
-=======
-import TechnicianForm from './TechnicianForm';
-import AppointmentForm from './AppointmentForm';
->>>>>>> sales
 import SaleForm from './SaleForm';
 import CustomerForm from './CustomerForm';
 import SalespeopleForm from './SalespeopleForm';
@@ -46,14 +41,14 @@ function App(props) {
             <Route path="list" element={<AutomobileList autos ={props.autos} />} />
             <Route path="new" element={<AutomobileForm />} />
           </Route>
-          <Route path="technicians">
+          {/* <Route path="technicians">
             <Route path="list" element={<TechnicianList technicians ={props.technicians} />} />
             <Route path="new" element={<TechnicianForm />} />
-          </Route>
-          <Route path="appointments">
+          </Route> */}
+          {/* <Route path="appointments">
             <Route path="history" element={<AppointmentList appointments ={props.appointments} />} />
             <Route path="new" element={<AppointmentForm />} />
-          </Route>
+          </Route> */}
           <Route path="sales">
             <Route path="list" element={<SalesList sales ={props.sales} />} />
             <Route path="new" element={<SaleForm />} />
