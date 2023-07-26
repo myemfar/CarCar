@@ -48,8 +48,6 @@ function LoadData() {
     const response = await fetch ('http://localhost:8090/api/salespeople/');
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
-      console.log(data.salespeople)
       setSalespeopleData(data.salespeople);
     } else {
       console.error(response);
@@ -60,8 +58,6 @@ function LoadData() {
     const response = await fetch ('http://localhost:8090/api/customers/');
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
-      console.log(data.customers)
       setCustomerData(data.customers);
     } else {
       console.error(response);
@@ -72,8 +68,6 @@ function LoadData() {
     const response = await fetch ('http://localhost:8090/api/sales/');
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
-      console.log(data.sales)
       setSalesData(data.sales);
     } else {
       console.error(response);

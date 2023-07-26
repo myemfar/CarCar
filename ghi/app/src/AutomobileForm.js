@@ -14,22 +14,18 @@ function AutomobileForm( ) {
 
     const handleModelChange = (event) =>{
         const value = event.target.value;
-        console.log(event.target)
         setModel(value);
     }
     const handleColorChange = (event) => {
         const value = event.target.value;
-        console.log(event.target)
         setColor(value);
     }
     const handleVinChange = (event) => {
         const value = event.target.value;
-        console.log(event.target)
         setVin(value);
     }
     const handleYearChange = (event) => {
         const value = event.target.value;
-        console.log(event.target)
         setYear(value);
     }
 
@@ -40,7 +36,6 @@ function AutomobileForm( ) {
       if (response.ok) {
         const data = await response.json();
         setModels(data.models)
-        console.log(data)
       }
     }
 
@@ -56,7 +51,6 @@ function AutomobileForm( ) {
         data.vin = vin;
         data.year = year;
         data.color = color;
-        console.log(data);
         const autosUrl = 'http://localhost:8100/api/automobiles/';
         const fetchConfig = {
         method: "post",
@@ -69,7 +63,6 @@ function AutomobileForm( ) {
     const response = await fetch(autosUrl, fetchConfig);
     if (response.ok) {
         const newAuto = await response.json();
-        console.log(newAuto);
         setYear('');
         setColor('');
         setModel('');
