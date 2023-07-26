@@ -12,6 +12,8 @@ function LoadData() {
   const [salespeopleData, setSalespeopleData] = useState(null);
   const [customerData, setCustomerData] = useState(null);
   const [salesData, setSalesData] = useState(null);
+  const [TechnicianData, setTechnicianData] = useState(null);
+  const [AppointmentData, setAppointmentData] = useState(null);
 
   // Define each function and api call
   async function loadManufacturers() {
@@ -74,6 +76,28 @@ function LoadData() {
     }
   }
 
+  async function loadTechnicians() {
+    const response = await fetch ('http://localhost:8080/api/technicians/');
+    if (response.ok) {
+      const data = await response.json();
+      setTechnicianData(data.technicians);
+    } else {
+      console.error(response);
+    }
+  }
+
+  async function loadAppointments() {
+    const response = await fetch ('http://localhost:8080/api/appointments/');
+    if (response.ok) {
+      const data = await response.json();
+      setAppointmentData(data.appointments);
+    } else {
+      console.error(response);
+    }
+  }
+
+  
+
   // Call all functions here
   React.useEffect(() => {
     loadManufacturers();
@@ -82,13 +106,15 @@ function LoadData() {
     loadSalespeople();
     loadCustomers();
     loadSales();
+    loadTechnicians();
+    loadAppointments();
   }, []);
 
   // Add here for each set of data
   return (
     <React.StrictMode>
       <App manufacturers={manufacturersData} autos={automobilesData} models={modelData} salespeople={salespeopleData}
-      customers={customerData} sales={salesData}
+      customers={customerData} sales={salesData} technicians={TechnicianData} appointments={AppointmentData}
       />
     </React.StrictMode>
   );
