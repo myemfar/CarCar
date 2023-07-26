@@ -1,37 +1,38 @@
+import React from 'react';
+
 function AppointmentList(props) {
-    return (
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>VIN</th>
-            <th>Customer Name</th>
-            <th>Date and Time</th>
-            <th>Technician</th>
-            <th>Reason</th>
-            <th>VIP</th>
-            <th>Status</th>
-            <th>Customer</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.appointments && props.appointments.map(appointment => {
+  return (
+    <table className="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">VIN</th>
+          <th scope="col">Date and Time</th>
+          <th scope="col">Technician</th>
+          <th scope="col">Reason</th>
+          <th scope="col">VIP</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {props.appointments &&
+          props.appointments.map((appointment) => {
+            const dateTime = new Date(appointment.date_time);
+            const formattedDateTime = `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
             return (
-                <tr key={appointment.id}>
-                    <td>{appointment.vin}</td>
-                    <td>{new Date(appointment.date_time). toLocaleString()}</td>
-                    <td>{appointment.technician}</td>
-                    <td>{appointment.reason}</td>
-                    <td>{appointment.vip}</td>
-                    <td>{appointment.status}</td>
-
-                </tr>
+              <tr key={appointment.id}>
+                <td>{appointment.vin}</td>
+                <td>{formattedDateTime}</td>
+                <td>{appointment.technician}</td>
+                <td>{appointment.reason}</td>
+                <td>{appointment.vip ? 'Yes' : 'No'}</td>
+                <td>{appointment.status}</td>
+              </tr>
             );
-            })}
-        </tbody>
-        </table>
-    );
+          })}
+      </tbody>
+    </table>
+  );
+}
 
-        }
-export default AppointmentList; 
-
+export default AppointmentList;
             

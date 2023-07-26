@@ -1,10 +1,8 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState} from 'react';
 
 function AppointmentForm( ) {
     const [dateTime, setDateTime] = useState('');
-    const [technicians, setTechnicians] = useState([]);
     const [technician, setTechnician] = useState('');
-    const [vip, setVip] = useState(false);
     const [vin, setVin] = useState('');
     const [reason, setReason] = useState('');
     const [status, setStatus] = useState('PENDING');
@@ -17,10 +15,6 @@ function AppointmentForm( ) {
     const handleTechnicianChange = (event) => {
         const value = event.target.value;
         setTechnician(value);
-    }
-    const handleVipChange = (event) => {
-        const value = event.target.checked;
-        setVip(value);
     }
     const handleVinChange = (event) => {
         const value = event.target.value;
@@ -38,21 +32,12 @@ function AppointmentForm( ) {
         const value = event.target.value;
         setCustomer(value);
     }
-    const handleReasonChange = (event) => {
-        const value = event.target.value;
-        setReason(value);
-    }
-
-    useEffect(() => {
-        fetchTechnicians();
-    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
         data.date_time = dateTime;
         data.technician = technician;
-        data.vip = vip;
         data.vin = vin;
         data.reason = reason;
         data.status = status;
@@ -63,14 +48,13 @@ function AppointmentForm( ) {
         body: JSON.stringify(data),
         headers: {
         'Content-Type': 'application/json',
-        },
+        }, 
     };
     const response = await fetch(appointmentUrl, fetchConfig);
     if (response.ok) {
         const newAppointment = await response.json();
         setDateTime('');
         setTechnician('');
-        setVip(false);
         setVin('');
         setReason('');
         setStatus('PENDING');
@@ -91,21 +75,9 @@ function AppointmentForm( ) {
                 <input onChange= {handleDateTimeChange} placeholder="date_time" required type="datetime-local" name="date_time" id="date_time" className="form-control" value={dateTime} />
                 <label htmlFor="date_time">Date and Time</label>
               </div>
-              <div className="mb-3">
-                <select onChange= {handleTechnicianChange} required id="technician" name= "technician" className="form-select" value={technician}>
-                  <option value="">Choose a technician</option>
-                  {technicians.map(tech => {
-                    return (
-                        <option key={tech.id} value={tech.id}>
-                            {tech.first_name} {tech.last_name}
-                        </option>
-                    );
-                  })}
-                </select>
-              </div>
               <div className="form-floating mb-3">
-                <input onChange= {handleVipChange} placeholder="vip" type="checkbox" name= "vip" id="vip" className="form-control" checked={vip}/>
-                <label htmlFor="vip">VIP</label>
+                <input onChange= {handleTechnicianChange} placeholder="technician" required type="text" name="technician" id="technician" className="form-control" value={technician}/>
+                <label htmlFor="technician">Technician</label>
               </div>
               <div className="form-floating mb-3">
                 <input onChange= {handleVinChange} placeholder="vin" required type="text" name= "vin" id="vin" className="form-control" value={vin}/>
