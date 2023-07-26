@@ -40,7 +40,7 @@ function SalespeopleForm( ) {
     // reset form after response is recieved
     const response = await fetch(salespeopleUrl, fetchConfig);
     if (response.ok) {
-        const newAuto = await response.json();
+        const newSalesperson = await response.json();
         setFirstName('');
         setLastName('');
         setEmployeeID('');

@@ -47,7 +47,7 @@ function CustomerForm( ) {
     // reset form after response is recieved
     const response = await fetch(customersUrl, fetchConfig);
     if (response.ok) {
-        const newAuto = await response.json();
+        const newCustomer = await response.json();
         setFirstName('');
         setLastName('');
         setAddress('');
