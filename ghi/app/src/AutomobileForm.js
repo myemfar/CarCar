@@ -81,11 +81,11 @@ function AutomobileForm( ) {
             <form onSubmit= {handleSubmit} id="create-car-form">
               <div className="form-floating mb-3">
                 <input onChange= {handleVinChange} placeholder="Vin" required type="text" name="vin" id="vin" className="form-control" value={vin} />
-                <label htmlFor="fabric">VIN</label>
+                <label htmlFor="vin">VIN</label>
               </div>
               <div className="form-floating mb-3">
                 <input onChange= {handleYearChange} placeholder="Year" required type="number" name="year" id="year" className="form-control" value={year}/>
-                <label htmlFor="style_name">Year</label>
+                <label htmlFor="year">Year</label>
               </div>
               <div className="form-floating mb-3">
                 <input onChange= {handleColorChange} placeholder="Color" required type="text" name= "color" id="color" className="form-control" value={color}/>
