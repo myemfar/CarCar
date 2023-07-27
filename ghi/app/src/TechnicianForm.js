@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 function TechnicianForm( ) {
-    // set our useStates for each property on the form
+    // set useStates for each property on the form
     // pulldowns require 2x usestates, one for the field and one for pulldown
 
     const [firstName, setFirstName] = useState('');
@@ -41,6 +41,8 @@ function TechnicianForm( ) {
         body: JSON.stringify(data),
         headers: {
         'Content-Type': 'application/json',
+    
+        
         },
     };
     // reset form after response is recieved
@@ -50,7 +52,9 @@ function TechnicianForm( ) {
         setFirstName('');
         setLastName('');
         setEmployee_id('');
+        alert("Well done old chap, you've created a new technician! Lets have some tea and crumpets and discuss the experience.");
     } else if (!response.ok) {
+      
         console.log(fetchConfig)
     }
     }
