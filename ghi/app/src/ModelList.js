@@ -4,7 +4,7 @@ function ModelList(props) {
         <thead>
           <tr>
             <th>name</th>
-            <th>picture_url</th>
+            <th>picture</th>
             <th>manufacturer</th>
           </tr>
         </thead>
@@ -13,7 +13,7 @@ function ModelList(props) {
             return (
               <tr key={model.id}>
                 <td>{ model.name }</td>
-                <td>{ model.picture_url }</td>
+                <td><img src ={ model.picture_url } alt={model.name} style={{ width: '200px', height: '100px' }} /></td>
                 <td>{ model.manufacturer.name }</td>
               </tr>
             );
