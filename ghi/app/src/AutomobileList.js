@@ -20,8 +20,6 @@ function AutomobileList(props) {
       siftVins.push(soldVin)
     });
 
-    // working code
-
     const fetchAutos = async () => {
       const url = 'http://localhost:8100/api/automobiles/';
           const response = await fetch(url);
@@ -45,9 +43,6 @@ function AutomobileList(props) {
             'Content-Type': 'application/json',
             },
         };
-        console.log("set to sold")
-        console.log(data)
-
         fetch(url, putConfig);
       } else {
         auto.sold = false
@@ -61,8 +56,6 @@ function AutomobileList(props) {
             'Content-Type': 'application/json',
             },
         };
-        console.log("set to unsold")
-        console.log(data)
         fetch(url, putConfig);
       }
       });
@@ -91,6 +84,8 @@ function AutomobileList(props) {
   //     fetch(url, putConfig)
   //   }
   // })
+
+
   updateAutos();
   useEffect(() => {
     fetchSales();
