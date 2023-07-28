@@ -108,6 +108,9 @@ def api_delete_customer(request, customer_id):
 def api_list_sales(request):
     if request.method == "GET":
         sales = Sale.objects.all()
+        for sale in sales:
+            sale.automobile.sold = True
+            sale.save()
         return JsonResponse(
             {"sales": sales},
             encoder=SaleEncoder,
@@ -160,6 +163,7 @@ def api_list_sales(request):
 def api_delete_sale(request, sale_id):
     try:
         sale = Sale.objects.get(id=sale_id)
+        sale.automobile.sold = False
         sale.delete()
         return JsonResponse({"success": "sale deleted"})
     except Sale.DoesNotExist:
