@@ -61,30 +61,10 @@ function AutomobileList(props) {
       });
 
     }
-    const handleRefresh = async () => {
-      updateAutos();
-      window.location.reload();
-    }
-
-  //   Code causes page to crash on refresh
-
-  // props.autos.map(auto =>{
-  //   if (siftVins.includes(auto.vin)) {
-  //     const id = auto.id
-  //     const url = `http://localhost:8100/api/automobiles/${id}/`
-  //     const data = auto
-  //     auto.sold = true
-  //     const putConfig = {
-  //       method: "put",
-  //       body: JSON.stringify(data),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         },
-  //     };
-  //     fetch(url, putConfig)
-  //   }
-  // })
-
+    // const handleRefresh = async () => {
+    //   updateAutos();
+    //   window.location.reload();
+    // }
 
   updateAutos();
   useEffect(() => {
@@ -98,7 +78,7 @@ function AutomobileList(props) {
             <th>Color</th>
             <th>Year</th>
             <th>Vin</th>
-            <th>Sold <button onClick={() => handleRefresh()}>Force update sales</button></th>
+            <th>Sold</th>
           </tr>
         </thead>
         <tbody>
